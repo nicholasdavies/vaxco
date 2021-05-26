@@ -14,7 +14,8 @@ path.out <- "~/Dropbox/Covid-WHO-vax/outputs/"
 path.fig <- "~/Dropbox/Covid-WHO-vax/figures/revised_after_review/"
 
 # load epi scenario info
-epi_scen.dt <-  as.data.table(readRDS(paste0(path.in,"config.rds")))
+# epi_scen.dt <-  as.data.table(readRDS(paste0(path.in,"config.rds")))
+epi_scen.dt <-  as.data.table(readRDS(paste0(path.out,"config.rds")))
 
 # load econ scenario info
 
