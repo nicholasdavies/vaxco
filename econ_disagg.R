@@ -128,12 +128,13 @@ econ_digestor <- function(epi.dt, dalys.dt, econ_pars){
            doses_per_day*doses_per_anniversary[anni_year]/age_cats *
                cost_vac_dose * fifelse(vax_delay == 0, 1, 2)
        ))
-    ][,.(
-      vax_costs = with(econ_pars, (1/(1 + disc.costs)^(anni_year - 1)) * vax_costs),
-      coi_costs = with(econ_pars, (1/(1 + disc.costs)^(anni_year - 1)) * coi_costs)
-    )
     ][,
       costs := coi_costs + vax_costs
+    ][,.(
+      vax_costs = with(econ_pars, (1/(1 + disc.costs)^(anni_year - 1)) * vax_costs),
+      coi_costs = with(econ_pars, (1/(1 + disc.costs)^(anni_year - 1)) * coi_costs),
+      costs = with(econ_pars, (1/(1 + disc.costs)^(anni_year - 1)) * costs)
+    )
     ]
     
     epi.dt[
