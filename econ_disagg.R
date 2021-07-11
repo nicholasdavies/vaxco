@@ -152,13 +152,13 @@ econ_digestor <- function(epi.dt, dalys.dt, econ_pars){
     ]
     
     agg.dt <- epi.dt[,
-        .(costs = sum(costs), coi_costs = sum(costs), vax_costs = sum(costs), dalys = sum(dalys)),
+        .(costs = sum(costs), coi_costs = sum(coi_costs), vax_costs = sum(vax_costs), dalys = sum(dalys)),
         by=.(id, sampleId, anni_year)
     ]
     
     agg.dt[
         order(anni_year),
-        c("ccosts","ccoi_costs","cvax_costs","cdalys") := .(cumsum(costs), cumsum(costs), cumsum(costs), cumsum(dalys)),
+        c("ccosts","ccoi_costs","cvax_costs","cdalys") := .(cumsum(costs), cumsum(coi_costs), cumsum(vax_costs), cumsum(dalys)),
         by=.(id, sampleId)
     ]
     
